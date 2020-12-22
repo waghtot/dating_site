@@ -15,12 +15,14 @@
 
     <?php
         require_once('app/views/pages/partial/navbar.php');
-    
-    // and this is the place for my code for pagre displays
     ?>
 
     <div class="container-fluid">
-        <h1>Hello, world!</h1>
+    <?php
+      echo "<pre>".print_r($data, 1)."</pre>";
+      View::render($data);
+
+    ?>
     </div>
 
 

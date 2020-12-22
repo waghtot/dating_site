@@ -59,8 +59,6 @@ class Definitions
         if(is_array($request))
         {
 
-            $route->data = array();
-
             foreach($request as $key=>$value)
             {
                 if($key != 0)
@@ -77,8 +75,6 @@ class Definitions
                                 if(is_numeric($value)!==true)
                                 {
                                     $route->partial = $value;
-                                }else{
-                                    $route->data[] = $value;
                                 }
                             }
                         break;
@@ -93,12 +89,10 @@ class Definitions
             $route->controller = ucfirst($request);
             $route->partial = NULL;
 
-        
         }
 
-        // $route->controller = self::checkUser($route->controller);
-        if(empty($route->data)){
-            $route->data = self::getData();
+        if(self::getData() !== false){
+            $route->ref = self::getData();
         }
 
         return $route;
@@ -128,6 +122,7 @@ class Definitions
 
             foreach($precut as $key => $value)
             {
+                error_log('are we here? inside loop for get data?');
                 $key = substr($value, 0, strpos($value, "="));
                 $value = substr($value, strpos($value, "=")+1, strlen($value));
                 $data[$key] = $value;
@@ -135,7 +130,6 @@ class Definitions
         }else{
             $data = NULL;    
         }
-
         return $data;
     }
 
@@ -156,7 +150,6 @@ class Definitions
             return $controller;
         }else{
             return 'Home';
-            // return 'Login';
         }
 
     }

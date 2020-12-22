@@ -8,11 +8,13 @@ class Home
         }
     }
 
-    public function index($data)
+    public function index($data = null)
     {
+
         $page = new stdClass();
         $page->view = get_called_class();
-        $page->data = 'Happy to see you here :)';
-        return $page;
+        $page->data = $data;
+        return $data;
+
     }
 }
