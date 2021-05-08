@@ -1,6 +1,5 @@
 <?php
-
-class Definitions
+class Definitions extends Controller
 {
     public function getPostContent(){
         if(isset($_POST)){
@@ -32,11 +31,13 @@ class Definitions
         $url = self::chopURL();
         if(!empty($url))
         {
+            error_log('show object values: '.print_r($url, 1));
             $page = self::prepareObj($url);
             $name = $page->controller;
             if(class_exists($name)==true){
                 $class = new $name();
                 $data = $class->index($page);
+                error_log('show object values: '.print_r($data, 1));
                 new View($data);
             }
         }
@@ -74,6 +75,7 @@ class Definitions
                             {
                                 if(is_numeric($value)!==true)
                                 {
+                                    
                                     $route->partial = $value;
                                 }
                             }
@@ -122,7 +124,6 @@ class Definitions
 
             foreach($precut as $key => $value)
             {
-                error_log('are we here? inside loop for get data?');
                 $key = substr($value, 0, strpos($value, "="));
                 $value = substr($value, strpos($value, "=")+1, strlen($value));
                 $data[$key] = $value;
@@ -132,7 +133,6 @@ class Definitions
         }
         return $data;
     }
-
 
     public function checkUser($controller)
     {

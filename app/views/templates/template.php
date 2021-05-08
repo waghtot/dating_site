@@ -19,9 +19,7 @@
 
     <div class="container-fluid">
     <?php
-      echo "<pre>".print_r($data, 1)."</pre>";
       View::render($data);
-
     ?>
     </div>
 
